@@ -1,0 +1,35 @@
+# Define a porta em que nosso serviço vai rodar.
+server:
+  port: 8081
+  # Prefixo padrão a todos os endpoints deste serviço.
+  servlet:
+    context-path: /api/v1
+
+spring:
+  application:
+    name: user-service
+  
+  # --- Configuração do Banco de Dados (DataSource) ---
+  datasource:
+    url: jdbc:postgresql://localhost:5432/projectflow_db
+    # credenciais do docker-compose.yml (environment)
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+
+  # --- Configurações do JPA (Hibernate) ---
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    # Mostra os comandos SQL gerados no console para debug em DEV
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  
+  # --- Configurações do Flyway ---.
+  flyway:
+    enabled: true
+    # Se o banco de dados já tiver tabelas, o Flyway cria uma "linha de base" e aplica as migrações a partir daí.
+    baseline-on-migrate: true
